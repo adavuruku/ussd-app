@@ -55,12 +55,13 @@ app.post('*', (req, res) => {
     let response = `CON Enter your bid amount for ${selected}
     (lowest amount you want to pay)`
     res.send(response)
-  } 
-  else if (text.startsWith("2*1*")) {
+
+  } else if (text.startsWith("2*1*")) {
     const val = text.lastIndexOf("*");
     const amount = text.substr(val+1, (text.length - 1));
-    let response = `END This service cost N100.00 ${amount}`
+    let response = `END This service cost N100.00`
     res.send(response)
+
   }else if (text == '3') {
     // Business logic for first level response
     let response = `CON Available Items
@@ -71,13 +72,13 @@ app.post('*', (req, res) => {
     res.send(response)
   } else if (text == '3*1' || text == '3*2' || text == '3*3') {
     const selected = text == '3*1'? 'TV Set (Value: N100,000)' : text == '3*2' ? 'Generator (Value N200,000)' :  'Techno Spark (Value N85,000)';
-    let response = `COM Enter your bid amount for ${selected}
+    let response = `CON Enter your bid amount for ${selected}
     (lowest amount you want to pay)`
     res.send(response)
   } else if (text.startsWith("3*1*")) {
     const val = text.lastIndexOf("*");
     const amount = text.substr(val+1, (text.length - 1));
-    let response = `END This service cost N100.00 ${amount}`
+    let response = `END This service cost N100.00`
     res.send(response)
   } else {
     res.status(400).send('Bad request!')
