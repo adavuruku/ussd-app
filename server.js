@@ -13,6 +13,7 @@ app.get('*', (req, res) => {
 })
 app.post('*', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
+  console.log('here -> ', sessionId, serviceCode, phoneNumber, text)
   if (text == '') {
     // This is the first request. Note how we start the response with CON
     let response = `CON Welcome to the CREAM PLATFORM.
@@ -50,10 +51,11 @@ app.post('*', (req, res) => {
     res.send(response)
   } else if (text == '2*1' || text == '2*2' || text == '2*3') {
     const selected = text == '2*1'? 'TV Set (Value: N100,000)' : text == '2*2' ? 'Generator (Value N200,000)' :  'Techno Spark (Value N85,000)';
-    let response = `COM Enter your bid amount for ${selected}
+    let response = `CON Enter your bid amount for ${selected}
     (lowest amount you want to pay)`
     res.send(response)
-  } else if (text == '2*1*?' || text == '2*2*?' || text == '2*3*?') {
+  } 
+  else if (text == '2*1*?' || text == '2*2*?' || text == '2*3*?') {
     let response = `END This service cost N100.00 ${text}`
     res.send(response)
   }else if (text == '3') {
