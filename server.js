@@ -56,7 +56,7 @@ app.post('*', (req, res) => {
     (lowest amount you want to pay)`
     res.send(response)
 
-  } else if (text.startsWith("2*1*")) {
+  } else if (text.startsWith("2*1*") || text.startsWith("2*2*") || text.startsWith("2*3*")) {
     const val = text.lastIndexOf("*");
     const amount = text.substr(val+1, (text.length - 1));
     let response = `END This service cost N100.00`
@@ -75,7 +75,7 @@ app.post('*', (req, res) => {
     let response = `CON Enter your bid amount for ${selected}
     (lowest amount you want to pay)`
     res.send(response)
-  } else if (text.startsWith("3*1*")) {
+  } else if (text.startsWith("3*1*") || text.startsWith("3*2*") || text.startsWith("3*3*")) {
     const val = text.lastIndexOf("*");
     const amount = text.substr(val+1, (text.length - 1));
     let response = `END This service cost N100.00`
