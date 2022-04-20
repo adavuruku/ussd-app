@@ -14,6 +14,7 @@ app.get('*', (req, res) => {
 app.post('*', (req, res) => {
   let {sessionId, serviceCode, phoneNumber, text} = req.body
   console.log('here -> ', sessionId, serviceCode, phoneNumber, text)
+  text = text.trim()
   if (text == '') {
     // This is the first request. Note how we start the response with CON
     let response = `CON Welcome to the CREAM PLATFORM.
@@ -55,8 +56,10 @@ app.post('*', (req, res) => {
     (lowest amount you want to pay)`
     res.send(response)
   } 
-  else if (text == '2*1*?' || text == '2*2*?' || text == '2*3*?') {
-    let response = `END This service cost N100.00 ${text}`
+  else if (text.startsWith("2*1*")) {
+    const val = text.lastIndexOf("*");
+    const amount = text.substr(val+1, (text.length - 1));
+    let response = `END This service cost N100.00 ${amount}`
     res.send(response)
   }else if (text == '3') {
     // Business logic for first level response
@@ -71,8 +74,10 @@ app.post('*', (req, res) => {
     let response = `COM Enter your bid amount for ${selected}
     (lowest amount you want to pay)`
     res.send(response)
-  } else if (text == '3*1*?' || text == '3*2*?' || text == '3*3*?') {
-    let response = `END This service cost N100.00 ${text}`
+  } else if (text.startsWith("3*1*")) {
+    const val = text.lastIndexOf("*");
+    const amount = text.substr(val+1, (text.length - 1));
+    let response = `END This service cost N100.00 ${amount}`
     res.send(response)
   } else {
     res.status(400).send('Bad request!')
